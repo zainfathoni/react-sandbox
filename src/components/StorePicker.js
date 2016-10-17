@@ -1,10 +1,34 @@
 import React from 'react';
 
+import base from '../base';
+
 class StorePicker extends React.Component {
-  // constructor() {
-  //   super();
-  //   this.goToStore = this.goToStore.bind(this);
-  // }
+  constructor() {
+    super();
+
+    this.renderStores = this.renderStores.bind(this);
+
+    this.state = {
+      stores: {}
+    }
+  }
+
+  componentWillMount() {
+    // Fetch Stores
+    base
+      .fetch(`/stores`, {
+        context: this
+      })
+      .then(data => {
+        console.log(data);
+        this.setState({
+          stores: data
+        })
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
 
   goToStore(event) {
     event.preventDefault();
@@ -15,11 +39,20 @@ class StorePicker extends React.Component {
     this.context.router.transitionTo(`/store/${storeId}`);
   }
 
+  renderStores(key) {
+    return (
+      <li key={key}>{key} - {this.state.stores[key].name}</li>
+    )
+  }
+
   render() {
     // Any where else
     return (
       <form className="store-selector" onSubmit={(e) => this.goToStore(e)}>
-        <h2>Please Enter A Store</h2>
+        <h2>Pilih Toko</h2>
+        <ul>
+          {Object.keys(this.state.stores).map(this.renderStores)}
+        </ul>
         <input type="text" required placeholder="Store Name" defaultValue={'ojek-belanja'} ref={(input) => { this.storeInput = input }}/>
         <button type="submit">Visit Store →</button>
       </form>
