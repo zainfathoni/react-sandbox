@@ -6,8 +6,6 @@ class StorePicker extends React.Component {
   constructor() {
     super();
 
-    this.renderStores = this.renderStores.bind(this);
-
     this.state = {
       stores: {}
     }
@@ -39,7 +37,7 @@ class StorePicker extends React.Component {
     this.context.router.transitionTo(`/store/${storeId}`);
   }
 
-  renderStores(key) {
+  renderStore = (key) => {
     return (
       <li key={key}>{key} - {this.state.stores[key].name}</li>
     )
@@ -51,7 +49,7 @@ class StorePicker extends React.Component {
       <form className="store-selector" onSubmit={(e) => this.goToStore(e)}>
         <h2>Pilih Toko</h2>
         <ul>
-          {Object.keys(this.state.stores).map(this.renderStores)}
+          {Object.keys(this.state.stores).map(this.renderStore)}
         </ul>
         <input type="text" required placeholder="Store Name" defaultValue={'ojek-belanja'} ref={(input) => { this.storeInput = input }}/>
         <button type="submit">Visit Store →</button>
