@@ -7,7 +7,9 @@ class StorePicker extends React.Component {
     super();
 
     this.state = {
-      stores: {}
+      stores: {},
+      filteredStores: [],
+      keyword: 'ojek-belanja'
     }
   }
 
@@ -20,12 +22,24 @@ class StorePicker extends React.Component {
       .then(data => {
         console.log(data);
         this.setState({
-          stores: data
+          stores: data,
+          filteredStores: Object.keys(data)
         })
       })
       .catch(error => {
         console.log(error);
       });
+  }
+
+  filterStores = (keyword) => {
+    const filteredStores = Object
+      .keys(this.state.stores)
+      .filter(storeName => storeName.indexOf(keyword) !== -1);
+    console.log(filteredStores);
+    this.setState({
+      filteredStores,
+      keyword
+    })
   }
 
   goToStore(event) {
@@ -37,9 +51,9 @@ class StorePicker extends React.Component {
     this.context.router.transitionTo(`/store/${storeId}`);
   }
 
-  renderStore = (key) => {
+  renderButtonStore = (key) => {
     return (
-      <li key={key}>{key} - {this.state.stores[key].name}</li>
+      <button key={key} onClick={(e) => this.context.router.transitionTo(`/store/${key}`)}>{this.state.stores[key].name}</button>
     )
   }
 
@@ -48,10 +62,14 @@ class StorePicker extends React.Component {
     return (
       <form className="store-selector" onSubmit={(e) => this.goToStore(e)}>
         <h2>Pilih Toko</h2>
-        <ul>
-          {Object.keys(this.state.stores).map(this.renderStore)}
-        </ul>
-        <input type="text" required placeholder="Store Name" defaultValue={'ojek-belanja'} ref={(input) => { this.storeInput = input }}/>
+        <input
+          type="text"
+          required placeholder="Store Name" 
+          value={this.state.keyword} 
+          ref={(input) => { this.storeInput = input }}
+          onChange={(e) => this.filterStores(e.target.value)}
+        />
+        {this.state.filteredStores.map(this.renderButtonStore)}
         <button type="submit">Visit Store →</button>
       </form>
     )
