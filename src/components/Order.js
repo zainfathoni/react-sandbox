@@ -3,10 +3,6 @@ import { formatPrice } from '../helpers';
 import CSSTransitionGroup from 'react-addons-css-transition-group';
 
 class Order extends React.Component {
-  constructor() {
-    super();
-  }
-
   renderOrder = (key) => {
     const fish = this.props.fishes[key];
     const count = this.props.order[key];
