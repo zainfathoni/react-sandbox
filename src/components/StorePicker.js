@@ -60,8 +60,7 @@ class StorePicker extends React.Component {
           onChange={(e) => this.updateKeyword(e.target.value)}
         />
         <StoreList
-          stores={stores}
-          keyword={keyword}
+          {...this.state}
           goToStore={this.goToStore}
         />
       </div>
