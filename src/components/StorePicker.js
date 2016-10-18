@@ -1,4 +1,5 @@
 import React from 'react';
+import Loading from 'react-loading';
 
 import base from '../base';
 
@@ -72,6 +73,7 @@ class StorePicker extends React.Component {
         {this.state.filteredStores.map(this.renderButtonStore)}
         <button type="submit">Visit Store →</button>
       </form>
+        <Loading type='bars' color='#000' />
     )
   }
 }
