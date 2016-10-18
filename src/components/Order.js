@@ -3,12 +3,7 @@ import { formatPrice } from '../helpers';
 import CSSTransitionGroup from 'react-addons-css-transition-group';
 
 class Order extends React.Component {
-  constructor() {
-    super();
-    this.renderOrder = this.renderOrder.bind(this);
-  }
-
-  renderOrder(key) {
+  renderOrder = (key) => {
     const fish = this.props.fishes[key];
     const count = this.props.order[key];
     const removeButton = <button onClick={() => this.props.removeFromOrder(key)}>&times;</button>

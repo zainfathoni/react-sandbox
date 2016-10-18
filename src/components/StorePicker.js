@@ -1,28 +1,69 @@
 import React from 'react';
 
-class StorePicker extends React.Component {
-  // constructor() {
-  //   super();
-  //   this.goToStore = this.goToStore.bind(this);
-  // }
+import base from '../base';
+import StoreList from './StoreList';
 
-  goToStore(event) {
-    event.preventDefault();
-    // first grab the text from the box
-    const storeId = this.storeInput.value;
+class StorePicker extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      stores: {},
+      keyword: ''
+    }
+  }
+
+  /*** Component Life Cycle ***/
+
+  componentWillMount() {
+    // Fetch Stores
+    base
+      .fetch(`/stores`, {
+        context: this
+      })
+      .then(data => {
+        console.log(data);
+        this.setState({
+          stores: data
+        })
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
+  /*** Methods ***/
+
+  updateKeyword = (keyword) => {
+    this.setState({
+      keyword
+    })
+  }
+
+  goToStore = (storeId) => {
     console.log(`Going to ${storeId}`);
-    // second we're going to transition from / to /store/:storeId
     this.context.router.transitionTo(`/store/${storeId}`);
   }
 
+  /*** Render ***/
+
   render() {
-    // Any where else
+    const { stores, keyword } = this.state;
+
     return (
-      <form className="store-selector" onSubmit={(e) => this.goToStore(e)}>
-        <h2>Please Enter A Store</h2>
-        <input type="text" required placeholder="Store Name" defaultValue={'ojek-belanja'} ref={(input) => { this.storeInput = input }}/>
-        <button type="submit">Visit Store →</button>
-      </form>
+      <div className="store-selector">
+        <h2>Pilih Toko</h2>
+        <input
+          type="text"
+          required placeholder="Nama Toko" 
+          value={keyword} 
+          onChange={(e) => this.updateKeyword(e.target.value)}
+        />
+        <StoreList
+          {...this.state}
+          goToStore={this.goToStore}
+        />
+      </div>
     )
   }
 }
