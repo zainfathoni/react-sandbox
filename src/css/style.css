@@ -356,7 +356,7 @@ header.top h3:after {
           transform: translateX(-50%) rotateY(-14deg) translateX(50%);
   border-left: 0;
   border-right: 0;
-  min-width: 300px;
+  min-width: 30%;
 }
 .catch-of-the-day > *:last-child {
   -ms-flex-negative: 1;
