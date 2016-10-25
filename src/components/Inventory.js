@@ -100,13 +100,17 @@ class Inventory extends React.Component {
 
     // Check if they are not logged in at all
     if (!this.state.uid) {
-      return <div>{this.renderLogin()}</div>
+      return (
+        <div className="inventory">
+          {this.renderLogin()}
+        </div>
+      ) 
     }
 
     // Check if they are the owner of the current store
     if (this.state.uid !== this.state.owner) {
       return (
-        <div>
+        <div className="inventory">
           <p>Sorry, you aren't the owner of this store!</p>
           {logout}
         </div>
@@ -114,7 +118,7 @@ class Inventory extends React.Component {
     }
 
     return (
-      <div>
+      <div className="inventory">
         <h2>Inventory</h2>
         {logout}
         {Object.keys(this.props.fishes).map(this.renderInventory)}

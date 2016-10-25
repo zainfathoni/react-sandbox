@@ -647,3 +647,18 @@ input[type=submit].twitter:after {
 .loading-bars > div {
   margin: auto;
 }
+@media (max-width: 768px) {
+  .menu {
+    background-color: #f5a623;
+  }
+}
+@media (max-width: 48em) {
+  .order {
+    background-color: #0ff;
+  }
+}
+@media (max-width: 48rem) {
+  .inventory {
+    background-color: #ff0;
+  }
+}
