@@ -644,6 +644,6 @@ input[type=submit].twitter:after {
   text-align: center;
   font-size: 3rem;
 }
-.store-list > div {
+.loading-bars > div {
   margin: auto;
 }

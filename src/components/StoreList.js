@@ -9,7 +9,7 @@ class StoreList extends React.Component {
     // Render Loading Bars
     if (storeIds.length === 0) {
       return (
-        <div className="store-list">
+        <div className="loading-bars">
           <Loading type='bars' color='#000' />
         </div>
       )

@@ -36,7 +36,7 @@ class Order extends React.Component {
     // Render Loading Bars
     if (Object.keys(this.props.fishes).length === 0) {
       return (
-        <div className="store-list">
+        <div className="loading-bars">
           <Loading type='bars' color='#000' />
         </div>
       )
