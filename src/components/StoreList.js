@@ -23,9 +23,6 @@ class StoreList extends React.Component {
         Object.assign(res,
         { [key]: stores[key].name }), {});
 
-    console.log(keyword)
-    console.log(JSON.stringify(filteredStores));
-    
     return (
       <div className="store-list">
         {Object.keys(filteredStores)
