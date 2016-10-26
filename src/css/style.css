@@ -257,7 +257,7 @@ header.top {
   text-align: center;
 }
 header.top h1 {
-  font-size: 14.4rem;
+  font-size: 13rem;
   line-height: 0.7;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -279,7 +279,7 @@ header.top h1 .ofThe {
       -ms-flex-align: center;
           align-items: center;
   background: url("images/anchor.svg") center no-repeat;
-  background-size: cover;
+  background-size: contain;
   padding: 0 1rem;
 }
 header.top h1 .ofThe .of {
@@ -648,18 +648,17 @@ input[type=submit].twitter:after {
 .loading-bars > div {
   margin: auto;
 }
-@media (max-width: 768px) {
+@media (max-width: 64em) {
+  .catch-of-the-day {
+    display: inline-block;
+  }
   .menu {
-    background-color: #f5a623;
+    max-width: 70%;
+    float: left;
   }
 }
 @media (max-width: 48em) {
-  .order {
-    background-color: #0ff;
-  }
-}
-@media (max-width: 48rem) {
-  .inventory {
-    background-color: #ff0;
+  .menu {
+    max-width: 100%;
   }
 }

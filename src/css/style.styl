@@ -5,7 +5,7 @@
 header.top
   text-align center
   h1
-    font-size 14.4rem
+    font-size 13rem
     line-height 0.7 // this font has a wacky baseline
     display flex
     justify-content: center;
@@ -18,7 +18,7 @@ header.top
       justify-content: center;
       align-items: center;
       background url('images/anchor.svg') center no-repeat;
-      background-size cover
+      background-size contain
       padding 0 1rem
       .of
         padding-right 2rem
@@ -297,17 +297,15 @@ button, input[type=submit]
 .loading-bars > div
   margin auto
 
-// iPad width = 768px
-@media (max-width: 768px)
+// iPad Landscape width = 1024px / 16px = 64em
+@media (max-width: 64em) // iPad
+  .catch-of-the-day
+    display inline-block
   .menu
-    background-color orange
+    max-width 70%
+    float left
 
-// iPad width = 768px / 16px = 48em
+// iPad Portrait width = 768px / 16px = 48em
 @media (max-width: 48em) // iPad
-  .order
-    background-color cyan
-
-// iPad width = 768px / 16px = 48rem
-@media (max-width: 48rem) // iPad
-  .inventory
-    background-color yellow
+  .menu
+    max-width 100%
