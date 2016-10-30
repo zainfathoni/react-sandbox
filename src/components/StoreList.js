@@ -9,7 +9,7 @@ class StoreList extends React.Component {
     // Render Loading Bars
     if (storeIds.length === 0) {
       return (
-        <div className="store-list">
+        <div className="loading-bars">
           <Loading type='bars' color='#000' />
         </div>
       )
@@ -23,9 +23,6 @@ class StoreList extends React.Component {
         Object.assign(res,
         { [key]: stores[key].name }), {});
 
-    console.log(keyword)
-    console.log(JSON.stringify(filteredStores));
-    
     return (
       <div className="store-list">
         {Object.keys(filteredStores)

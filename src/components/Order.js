@@ -1,6 +1,8 @@
 import React from 'react';
-import { formatPrice } from '../helpers';
 import CSSTransitionGroup from 'react-addons-css-transition-group';
+import Loading from 'react-loading';
+
+import { formatPrice } from '../helpers';
 
 class Order extends React.Component {
   renderOrder = (key) => {
@@ -31,6 +33,15 @@ class Order extends React.Component {
   }
 
   render() {
+    // Render Loading Bars
+    if (Object.keys(this.props.fishes).length === 0) {
+      return (
+        <div className="loading-bars">
+          <Loading type='bars' color='#000' />
+        </div>
+      )
+    }
+
     const orderIds = Object.keys(this.props.order);
     const total = orderIds.reduce((prevTotal, key) => {
       const fish = this.props.fishes[key];
@@ -41,8 +52,9 @@ class Order extends React.Component {
       }
       return prevTotal;
     }, 0 )
+
     return (
-      <div className="order-wrap">
+      <div className="order">
         <h2>Your Order</h2>
 
         <CSSTransitionGroup

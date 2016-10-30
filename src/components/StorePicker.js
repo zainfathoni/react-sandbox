@@ -22,7 +22,6 @@ class StorePicker extends React.Component {
         context: this
       })
       .then(data => {
-        console.log(data);
         this.setState({
           stores: data
         })
@@ -48,7 +47,7 @@ class StorePicker extends React.Component {
   /*** Render ***/
 
   render() {
-    const { stores, keyword } = this.state;
+    const { keyword } = this.state;
 
     return (
       <div className="store-selector">
