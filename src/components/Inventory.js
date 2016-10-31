@@ -30,9 +30,40 @@ class Inventory extends React.Component {
     this.props.updateFish(key, updatedFish);
   }
 
-  authenticate = (provider) => {
-    console.log(`Trying to login with ${provider}`);
-    base.authWithOAuthPopup(provider, this.authHandler);
+  authenticateFacebook = () => {
+    console.log(`Trying to login with Facebook`);
+    base.authWithOAuthPopup('facebook', this.authHandler);
+  }
+
+  registerEmail = () => {
+    console.log(`Trying to register Email`);
+    base.createUser({
+      email: 'zain.fathoni@gmail.com',
+      password: 'ojekbelanja'
+    }, this.authHandler);
+  }
+
+  authenticateEmail = () => {
+    console.log(`Trying to login with Email`);
+    base.authWithPassword({
+      email: 'zain.fathoni@gmail.com',
+      password: 'ojekbelanja'
+    }, this.authHandler);
+  }
+
+  linkEmail = () => {
+    console.log('Trying to link Email account');
+    base.onAuth(user => {
+      if (user) {
+        var credential = new base.auth.EmailAuthProvider.credential('zain.fathoni@gmail.com', 'ojekbelanja');
+        console.log(user);
+        user.link(credential).then(function(user) {
+          console.log("Account linking success", user);
+        }, function(error) {
+          console.log("Account linking error", error);
+        });
+      }
+    });
   }
 
   logout = () => {
@@ -73,7 +104,10 @@ class Inventory extends React.Component {
       <nav className="renderLogin">
         <h2>Inventory</h2>
         <p>Sign in to manage your store's inventory</p>
-        <button className="facebook" onClick={() => this.authenticate('facebook')}>Log In with Facebook</button>
+        <button className="facebook" onClick={() => this.authenticateFacebook()}>Log In with Facebook</button>
+        <hr/>
+        <button className="twitter" onClick={() => this.registerEmail()}>Register with Email</button>
+        <button className="email" onClick={() => this.authenticateEmail()}>Log In with Email</button>
       </nav>
     )
   }
@@ -97,6 +131,7 @@ class Inventory extends React.Component {
 
   render() {
     const logout = <button onClick={() => this.logout()}>Log Out!</button>;
+    const email = <button className="email" onClick={() => this.linkEmail()}>Link with Email</button>;
 
     // Check if they are not logged in at all
     if (!this.state.uid) {
@@ -121,6 +156,7 @@ class Inventory extends React.Component {
       <div className="inventory">
         <h2>Inventory</h2>
         {logout}
+        {email}
         {Object.keys(this.props.fishes).map(this.renderInventory)}
         <AddFishForm addFish={this.props.addFish} />
         <button onClick={this.props.loadSamples}>Load Sample Fishes</button>

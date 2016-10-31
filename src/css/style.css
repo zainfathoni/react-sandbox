@@ -563,25 +563,26 @@ button.success:after,
 input[type=submit].success:after {
   background: #2dc22d;
 }
-button.github,
-input[type=submit].github,
+button.email,
+input[type=submit].email,
 button.facebook,
 input[type=submit].facebook,
 button.twitter,
 input[type=submit].twitter {
   border: 0;
   display: block;
+  margin-top: 2rem;
   margin-bottom: 2rem;
   width: 100%;
   color: #fff;
   padding: 2rem;
 }
-button.github,
-input[type=submit].github {
+button.email,
+input[type=submit].email {
   background: #82d465;
 }
-button.github:after,
-input[type=submit].github:after {
+button.email:after,
+input[type=submit].email:after {
   background: #5cc437;
 }
 button.facebook,
